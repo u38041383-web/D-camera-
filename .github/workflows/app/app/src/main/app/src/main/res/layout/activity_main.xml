@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- iPhone Screen Flash Effect (White Blink) -->
+    <View
+        android:id="@+id/shutterFlash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:alpha="0"
+        android:elevation="10dp" />
+
+    <!-- Top Bar (Flash, Chevron, Live Photo) -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:background="#40000000"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_compass"
+            app:tint="#FFCC00" /> <!-- Yellow Flash -->
+
+        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+        
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/arrow_down_float"
+            app:tint="#FFFFFF" />
+
+        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/presence_online"
+            app:tint="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Hidden Processing Status (Center Screen) -->
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:background="@drawable/tooltip_frame_dark"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bottom Controls Area (Black Gradient for contrast) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#A6000000"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Zoom Controls (0.5x, 1x, 2x) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_onoff_indicator_on"
+            android:backgroundTint="#80000000"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.5"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:layout_marginEnd="16dp"/>
+            
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="1x"
+                android:textColor="#FFCC00"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginEnd="16dp"/>
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Mode Selector -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="VIDEO" android:textColor="#B3FFFFFF" android:textSize="13sp" android:layout_marginEnd="20dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PHOTO" android:textColor="#FFCC00" android:textStyle="bold" android:textSize="13sp" android:layout_marginEnd="20dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PORTRAIT" android:textColor="#B3FFFFFF" android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Bottom Row: Gallery, Shutter, Flip -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="40dp">
+
+            <!-- Gallery Thumbnail -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="#4DFFFFFF" />
+
+            <!-- Asli iPhone Shutter Button (White Ring + Inner Circle) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnCapture"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_centerInParent="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="38dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="4dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="28dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Flip Camera Icon -->
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_popup_sync"
+                app:tint="#FFFFFF" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
